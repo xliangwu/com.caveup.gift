@@ -24,14 +24,14 @@
     <title>礼知遇-礼物专属定制</title>
 </head>
 <body>
-<iframe id="designFrame"
+<iframe id="designFrame" name="designFrame" style="display:none"
         src="https://www.ysd.com/Product/GoProductDesign?productId=44&productDetailId=115&templateId=0&imageName=scene/0009TOWG_1_1"
         frameborder="0"
         allowfullscreen></iframe>
 <script>
     //hide some component
     $(function () {
-        $("#designFrame").contents().find(".header").hide()
+        $('#designFrame').delay(5000).fadeIn();
     });
 
 </script>
