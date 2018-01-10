@@ -3,7 +3,8 @@ package com.xxxx.gift.com.xxxx.gift.web.bean;
 public enum PageVar {
 
     INDEX("index"),
-    DESIGN("design");
+    DESIGN("design"),
+	MYCANVAS("mycanvas");
 
     private String name;
 
