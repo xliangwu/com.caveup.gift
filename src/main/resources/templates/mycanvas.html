@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mycanvas.html</title>
+	
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <link th:href="@{bootstrap-4.0.0/css/bootstrap.min.css}" rel="stylesheet"/>
+    
+	<script th:src="@{scripts/jquery-3.2.1.min.js}" type="text/javascript"></script>
+	<script th:src="@{bootstrap-4.0.0/js/bootstrap.min.js}" type="text/javascript"></script>
+	
+	<script th:src="@{scripts/mycanvas.js}" type="text/javascript"></script>
+	<script th:src="@{scripts/fabric.js}" type="text/javascript"></script>
+  </head>
+  
+  <body>
+  	<a class="btn btn-info" onclick="enlarge()" role="button">放大</a>
+  	&nbsp;
+  	<a id="freeDrawingMode" class="btn btn-info"  role="button">涂鸦</a>
+  	&nbsp;
+  	<a id="addTextbox" class="btn btn-info"  role="button">文本</a>
+  	<div id="penPanel">
+  		粗细<span id="penWidthLable">10</span>
+  		<input id="penWidthControl" type="range" value="10" min="1" max="30"/>
+  	</div>
+  	<div id="fontPanel">
+  		<select id="fontSelect">
+  			<option value="方正舒体">方正舒体</option>
+  			<option value="楷体">楷体</option>
+  			<option value="微软雅黑">微软雅黑</option>
+  			<option value="Noto Sans">Noto Sans</option> 
+  			<option value="Times New Roman">Times New Roman</option>
+  		</select>
+  	</div>
+  	<br>
+  	<canvas id="canvas" width='500' height='480' style="border:solid"></canvas>
+  	<img id="jspang-img"  src="./img/handsome.jpeg">
+  	 
+  </body>
+  
+</html>
