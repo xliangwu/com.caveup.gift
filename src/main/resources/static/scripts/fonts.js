@@ -7,6 +7,7 @@
 	};
 	
 	function load(fontFamily, string){
+		removeFontFace(fontFamily);
 		var url = "fonts/"+fontFamily+".ttf?key="+string;
 		addFontFace(fontFamily, url);
 	}
