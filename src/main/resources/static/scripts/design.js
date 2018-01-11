@@ -1,90 +1,129 @@
 $(function () {
-    var status;
-    var canvas = new fabric.Canvas('canvas');//声明画布
+    function FabricDesign() {
+        this.targetCanvas = new fabric.Canvas('canvas');
+        this.penSize = 10;
+        this.toolbarEle = $('#toolbar');
 
-    $("#add-draw-button").on("click", startDraw);
-    $("#close-draw-button").on("click", endDraw);
-    $("#delete-active-button").on("click", deleteSelectedDraw);
+        this.showToolBar = function () {
+            $(this.toolbarEle).show();
+        };
 
-    $(window).keyup(deleteLayer);
-    $("#penWidthControl").on("change", changePenWidth);
+        this.hideToolBar = function () {
+            $(this.toolbarEle).hide();
+        };
 
-    function showToolBar() {
-        $('#toolbar').show();
-    }
+        this.addImageEle = function (imgEle) {
+            //suggest image 400*400
+            var fabricImg = new fabric.Image(imgEle, {
+                left: 10,
+                top: 10,
+                width: imgEle.naturalWidth,
+                height: imgEle.naturalHeight,
+                scaleY: 200 / imgEle.naturalWidth,
+                scaleX: 200 / imgEle.naturalWidth
+            });
 
-    function hideToolBar() {
-        $('#toolbar').hide();
-    }
+            fabricImg.borderColor = 'rgba(27,171,235,0.75)';
+            fabricImg.cornerSize = 25;
+            fabricImg.cornerColor = 'rgba(27,171,235,0.75)';
+            fabricImg.cornerStyle = 'circle';
+            fabricImg.transparentCorners = false;
 
-    function startDraw() {
-        showToolBar();
-        canvas.isDrawingMode = true;
-        canvas.freeDrawingBrush.width = parseInt($("#penWidthControl").attr("value")) || 1;
-    }
+            this.targetCanvas.add(fabricImg);
+        };
 
-    function endDraw() {
-        hideToolBar();
-        canvas.isDrawingMode = false;
-        groupThisTimeDraw();
-    }
+        this.deleteEle = function () {
+            var activeOb = this.targetCanvas.getActiveObject();
+            if (activeOb) {
+                if (confirm("确定删除选定图层")) {
+                    if (activeOb.forEachObject) {
+                        activeOb.forEachObject(function (obj) {
+                            this.targetCanvas.remove(obj);
+                        });
+                    }
+                    this.targetCanvas.remove(activeOb);
+                }
+            }
+        };
 
-    function deleteSelectedDraw() {
-        var activeOb = canvas.getActiveObject();
-        if (activeOb) {
-            if (confirm("确定删除选定图层")) {
-                if (activeOb.forEachObject) {
-                    activeOb.forEachObject(function (obj) {
-                        canvas.remove(obj);
+        this.startDraw = function () {
+            this.showToolBar();
+            this.targetCanvas.isDrawingMode = true;
+            this.targetCanvas.freeDrawingBrush.width = this.penSize;
+        };
+
+        this.endDraw = function () {
+            this.hideToolBar();
+            this.targetCanvas.isDrawingMode = false;
+            this.groupThisTimeDraw();
+        };
+
+        this.groupThisTimeDraw = function () {
+            var pathArray = new Array();
+            var groupArray = new Array();
+            this.targetCanvas.forEachObject(function (obj) {
+                console.info(obj.get("type"));
+                if (obj.isType("path")) {
+                    pathArray.push(obj);
+                }
+                if (obj.isType("group")) {
+                    groupArray.push(obj);
+                }
+            });
+            console.info(" Path size before filter: " + pathArray.length);
+            if (pathArray.length > 0) {
+                for (var j = 0; j < groupArray.length; j++) {
+                    groupArray[j].forEachObject(function (obj) {
+                        for (var i = 0; i < pathArray.length; i++) {
+                            if (obj == pathArray[i]) {
+                                pathArray.splice(i, 1);
+                            }
+                        }
                     });
                 }
-                canvas.remove(activeOb);
+                console.info("Path size after filter: " + pathArray.length);
+                if (pathArray.length > 0) {
+                    var pathGroup = new fabric.Group(pathArray);
+                    pathGroup.borderColor = 'rgba(27,171,235,0.75)';
+                    pathGroup.cornerSize = 25;
+                    pathGroup.cornerColor = 'rgba(27,171,235,0.75)';
+                    pathGroup.cornerStyle = 'circle';
+                    pathGroup.transparentCorners = false;
+                    this.targetCanvas.add(pathGroup);
+                }
             }
         }
     }
 
-    // group
-    function groupThisTimeDraw() {
-        var pathArray = new Array();
-        var groupArry = new Array();
-        canvas.forEachObject(function (obj) {
-            console.info(obj.get("type"));
-            if (obj.isType("path")) {
-                pathArray.push(obj);
-            }
-            if (obj.isType("group")) {
-                groupArry.push(obj);
-            }
+    var fabricDesign = new FabricDesign();
+    if (fabricDesign) {
+        //register event for fabric object
+        $("#add-draw-button").on("click", function () {
+            fabricDesign.startDraw();
         });
-        console.info(" Path size before filter: " + pathArray.length);
-        if (pathArray.length > 0) {
-            for (var j = 0; j < groupArry.length; j++) {
-                groupArry[j].forEachObject(function (obj) {
-                    for (var i = 0; i < pathArray.length; i++) {
-                        if (obj == pathArray[i]) {
-                            pathArray.splice(i, 1);
-                        }
-                    }
+
+        $("#close-draw-button").on("click", function () {
+            fabricDesign.endDraw();
+        });
+
+        $("#delete-active-button").on("click", function () {
+            fabricDesign.deleteEle();
+        });
+
+        $("#penWidthControl").on("change", function () {
+            $("#penWidthLabel").html(this.value);
+            fabricDesign.penSize = parseInt(this.value) || 5;
+        });
+
+        $("#imageContent").find("a").each(function (index, ele) {
+            $(ele).on("click", function () {
+                $('#add-pic').modal('hide');
+                $(this).children("img").each(function (index, ele) {
+                    console.log("++ Image to design");
+                    fabricDesign.addImageEle(ele);
                 });
-            }
-            console.info("Path size after filter: " + pathArray.length);
-            if (pathArray.length > 0) {
-                var pathGroup = new fabric.Group(pathArray);
-                canvas.add(pathGroup);
-            }
-        }
+            });
+        });
     }
-
-    function deleteLayer(event) {
-        if (event.keyCode == 46) {
-            deleteSelectedDraw();
-        }
-    }
-
-    function changePenWidth() {
-        $("#penWidthLabel").html(this.value);
-        canvas.freeDrawingBrush.width = parseInt(this.value) || 1;
-    }
-
 });
 
