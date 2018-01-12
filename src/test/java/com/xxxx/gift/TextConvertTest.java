@@ -1,6 +1,6 @@
 package com.xxxx.gift;
 
-import com.xxxx.gift.com.xxxx.gift.web.convert.TextConvert;
+import com.xxxx.gift.web.convert.TextConvert;
 import org.junit.Test;
 
 import java.io.BufferedReader;

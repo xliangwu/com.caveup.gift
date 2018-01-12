@@ -15,15 +15,15 @@ import com.xxxx.gift.web.service.SfntlyService;
 @RestController
 @RequestMapping("/fonts")
 public class FontController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(FontController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FontController.class);
 
-	@Autowired
-	SfntlyService sfntlyService;
-	
-	@RequestMapping("/{fontFamily}.ttf")
-	public byte[] getSubFont(@PathVariable String fontFamily, @RequestParam(value="key") String subString) throws IOException {
-		LOGGER.info("get sub font for {},{}",fontFamily,subString);
-		return sfntlyService.getSubFont(fontFamily, subString);
-	}
-	
+    @Autowired
+    SfntlyService sfntlyService;
+
+    @RequestMapping("/{fontFamily}.ttf")
+    public byte[] getSubFont(@PathVariable String fontFamily, @RequestParam(value = "key") String subString) throws IOException {
+        LOGGER.info("get sub font for {},{}", fontFamily, subString);
+        return sfntlyService.getSubFont(fontFamily, subString);
+    }
+
 }

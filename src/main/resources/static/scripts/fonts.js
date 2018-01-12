@@ -1,9 +1,9 @@
 (function($) {
 	
 	$.font= {
-		load : load,
-		addFontFace:addFontFace,
-		removeFontFace:removeFontFace
+        load: load,
+        addFontFace: addFontFace,
+        removeFontFace: removeFontFace
 	};
 	
 	function load(fontFamily, string){

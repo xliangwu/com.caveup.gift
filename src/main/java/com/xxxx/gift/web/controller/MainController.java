@@ -29,7 +29,7 @@ public class MainController {
     public String mycanvas() {
         return PageVar.MYCANVAS.getName();
     }
-    
+
     @RequestMapping("fonttest")
     public String fonttest() {
         return "fontTest";

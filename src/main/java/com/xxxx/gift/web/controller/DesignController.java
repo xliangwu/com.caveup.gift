@@ -1,9 +1,9 @@
-package com.xxxx.gift.com.xxxx.gift.web.controller;
+package com.xxxx.gift.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xxxx.gift.com.xxxx.gift.web.bean.TextImage;
-import com.xxxx.gift.com.xxxx.gift.web.convert.TextConvert;
+import com.xxxx.gift.web.bean.TextImage;
+import com.xxxx.gift.web.convert.TextConvert;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class DesignController {
             File output = new File(uuid + ".png");
             TextImage textImage = TextConvert.text2Image(content, fontName, fontSize, output);
             FileUtils.deleteQuietly(output);
-
+            LOGGER.info("Generate image :{}", output.getPath());
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(textImage);
         } catch (JsonProcessingException e) {
