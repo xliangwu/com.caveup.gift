@@ -12,15 +12,19 @@ $(function () {
             $(this.toolbarEle).hide();
         };
 
-        this.addImageEle = function (imgEle) {
+        this.addImageEle = function (imgEle, width, height) {
             //suggest image 400*400
+            var fabricWidth = width || imgEle.naturalWidth;
+            var fabricHeight = height || imgEle.naturalHeight;
+            fabricWidth = Math.max(fabricWidth, 40);
+            fabricHeight = Math.max(fabricHeight, 30);
             var fabricImg = new fabric.Image(imgEle, {
                 left: 10,
                 top: 10,
-                width: imgEle.naturalWidth,
-                height: imgEle.naturalHeight,
-                scaleY: 200 / imgEle.naturalWidth,
-                scaleX: 200 / imgEle.naturalWidth
+                width: fabricWidth,
+                height: fabricHeight,
+                scaleY: 200 / fabricWidth,
+                scaleX: 200 / fabricWidth
             });
 
             fabricImg.borderColor = 'rgba(27,171,235,0.75)';
@@ -113,6 +117,30 @@ $(function () {
         $("#penWidthControl").on("change", function () {
             $("#penWidthLabel").html(this.value);
             fabricDesign.penSize = parseInt(this.value) || 5;
+        });
+
+        $('#save-text-button').on("click", function () {
+            var fontName = $('#inputFont').val();
+            var fontSize = $('#inputFontSize').val();
+            var content = $('#inputText').val();
+            $.ajax({
+                method: "POST",
+                dataType: 'json',
+                crossDomain: true,
+                url: "design/text_image.html",
+                data: {fontName: fontName, fontSize: fontSize, content: content},
+                success: function (result) {
+                    $('#tempTextImage').attr("src", result.base64Code);
+                    var width = result.width;
+                    var height = result.height;
+                    $('#add-text').modal('hide');
+                    var ele = $('#tempTextImage');
+                    fabricDesign.addImageEle(ele[0], width, height);
+                },
+                error: function (data) {
+
+                }
+            });
         });
 
         $("#imageContent").find("a").each(function (index, ele) {
