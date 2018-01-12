@@ -16,49 +16,30 @@
 <script type="text/javascript">
   $(function(){
 	  	$("#fontSelect").on("change", function() {
-  			$("#textDiv").css("font-family", this.value);
+  			$("#testText").css("font-family", this.value);
+  			var text = $("#testText").val();
+  			$.font.load(this.value, text);
   		});
-  		
-  		$("#addFont").on("click", function() {
-  			$.font.load("RealitySunday","陈昌胜");
-  		});
+
   		$("#removeFont").on("click", function() {
   			$.font.removeFontFace("SingleMalta");
   		});
+  		
   });
 </script>
-
-
-<style>
-   @font-face {
-		font-family:SingleMalta;
-		src:url('fonts/SingleMalta.ttf?key=陈昌胜');
-	}
-	@font-face {
-		font-family:RealitySunday;
-		src:url('fonts/RealitySunday.ttf?key=陈昌胜');
-	}
- </style>
 
 </head>
   
   <body>
-  		<input id="addFont" type="button" value="添加字体"></input> 
-  		<input id="removeFont" type="button" value="移除字体"></input>
+  		<input id="removeFont" type="button" value="移除字体"/>
   		<br/>	
   		<select id="fontSelect">
-  			<option value="方正舒体">方正舒体</option>
-  			<option value="楷体">楷体</option>
   			<option value="SingleMalta">SingleMalta</option>
-  			<option value="RealitySunday">RealitySunday</option> 
-  			<option value="Times New Roman">Times New Roman</option>
+  			<option value="RealitySunday">RealitySunday</option>
+  			<option value="方舒">方舒</option>
   		</select>
   		
-  		<div id="textDiv">
-  			English: AaBbCcDd
-  			<Br>
-  			中文	   ：      陈昌胜
-  		</div>
+  		<input id="testText" type="textbox"/>
   </body>
   
 </html>
