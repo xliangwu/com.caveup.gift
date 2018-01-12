@@ -9,17 +9,15 @@ import sun.misc.BASE64Encoder;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class TextConvert {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TextConvert.class);
     private static final int DEFAULT_WIDTH = 100;
     private static final int DEFAULT_HEIGHT = 80;
-    private static final int DEFAULT_WIDTH_OFFSET = 20;
 
     public static String image2Base64(String imagePath) {
         InputStream in = null;
@@ -28,7 +26,6 @@ public final class TextConvert {
             in = new FileInputStream(new File(imagePath));
             data = new byte[in.available()];
             in.read(data);
-            in.close();
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         } finally {
@@ -39,30 +36,34 @@ public final class TextConvert {
     }
 
     public static TextImage text2Image(String text, String fontName, int fontSize, File output) {
+        List<String> lines = parseMultipleLines(text);
+
         BufferedImage img = new BufferedImage(DEFAULT_WIDTH, DEFAULT_WIDTH, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
         Font font = new Font(fontName, Font.PLAIN, fontSize);
         g2d.setFont(font);
         FontMetrics fm = g2d.getFontMetrics();
-        int width = fm.stringWidth(text) + DEFAULT_WIDTH_OFFSET;
-        int height = fm.getHeight();
+
+        int width = 0;
+        int height = 0;
+        for (String line : lines) {
+            width = Math.max(fm.stringWidth(line), width);
+            height += fm.getHeight();
+        }
         g2d.dispose();
 
         img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2d = img.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
-        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setFont(font);
         fm = g2d.getFontMetrics();
         g2d.setColor(Color.BLACK);
-        g2d.drawString(text, 0, fm.getAscent());
+        int cy = fm.getAscent();
+        for (String line : lines) {
+            g2d.drawString(line, 0, cy);
+            cy += fm.getHeight();
+        }
         g2d.dispose();
+
         try {
             ImageIO.write(img, "png", output);
             String base64ImageStr = image2Base64(output.getPath());
@@ -78,5 +79,21 @@ public final class TextConvert {
             LOGGER.error(ex.getMessage(), ex);
         }
         return null;
+    }
+
+    private static List<String> parseMultipleLines(String text) {
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new StringReader(text))) {
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    lines.add(line);
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+
+        return lines;
     }
 }

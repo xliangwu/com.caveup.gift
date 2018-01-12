@@ -130,12 +130,12 @@ $(function () {
                 url: "design/text_image.html",
                 data: {fontName: fontName, fontSize: fontSize, content: content},
                 success: function (result) {
-                    $('#tempTextImage').attr("src", result.base64Code);
+                    var img = new Image();
+                    img.src = result.base64Code;
                     var width = result.width;
                     var height = result.height;
+                    fabricDesign.addImageEle(img, width, height);
                     $('#add-text').modal('hide');
-                    var ele = $('#tempTextImage');
-                    fabricDesign.addImageEle(ele[0], width, height);
                 },
                 error: function (data) {
 
