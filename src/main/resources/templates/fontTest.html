@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mycanvas.html</title>
+	
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+	<script th:src="@{scripts/jquery-3.2.1.min.js}" type="text/javascript"></script>
+	
+	<script th:src="@{scripts/fonts.js}" type="text/javascript"></script>
+	  
+	  
+	  
+<script type="text/javascript">
+  $(function(){
+	  	$("#fontSelect").on("change", function() {
+  			$("#textDiv").css("font-family", this.value);
+  		});
+  		
+  		$("#addFont").on("click", function() {
+  			$.font.load("RealitySunday","陈昌胜");
+  		});
+  		$("#removeFont").on("click", function() {
+  			$.font.removeFontFace("SingleMalta");
+  		});
+  });
+</script>
+
+
+<style>
+   @font-face {
+		font-family:SingleMalta;
+		src:url('fonts/SingleMalta.ttf?key=陈昌胜');
+	}
+	@font-face {
+		font-family:RealitySunday;
+		src:url('fonts/RealitySunday.ttf?key=陈昌胜');
+	}
+ </style>
+
+</head>
+  
+  <body>
+  		<input id="addFont" type="button" value="添加字体"></input> 
+  		<input id="removeFont" type="button" value="移除字体"></input>
+  		<br/>	
+  		<select id="fontSelect">
+  			<option value="方正舒体">方正舒体</option>
+  			<option value="楷体">楷体</option>
+  			<option value="SingleMalta">SingleMalta</option>
+  			<option value="RealitySunday">RealitySunday</option> 
+  			<option value="Times New Roman">Times New Roman</option>
+  		</select>
+  		
+  		<div id="textDiv">
+  			English: AaBbCcDd
+  			<Br>
+  			中文	   ：      陈昌胜
+  		</div>
+  </body>
+  
+</html>

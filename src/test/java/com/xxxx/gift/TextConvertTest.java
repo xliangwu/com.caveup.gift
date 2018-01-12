@@ -1,7 +1,8 @@
 package com.xxxx.gift;
 
-import com.xxxx.gift.com.xxxx.gift.web.convert.TextConvert;
 import org.junit.Test;
+
+import com.xxxx.gift.web.convert.TextConvert;
 
 import java.io.File;
 

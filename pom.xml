@@ -47,6 +47,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        
+		<!-- for sub set font -->
+        <dependency>
+        	<groupId>com.google.typography.font</groupId>
+			<artifactId>sfntly</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+	 	</dependency>
+	 	
     </dependencies>
 
     <build>

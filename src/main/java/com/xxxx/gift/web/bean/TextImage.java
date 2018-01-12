@@ -1,4 +1,4 @@
-package com.xxxx.gift.com.xxxx.gift.web.bean;
+package com.xxxx.gift.web.bean;
 
 public class TextImage {
 

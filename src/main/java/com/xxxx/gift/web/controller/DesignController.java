@@ -1,9 +1,10 @@
-package com.xxxx.gift.com.xxxx.gift.web.controller;
+package com.xxxx.gift.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xxxx.gift.com.xxxx.gift.web.bean.TextImage;
-import com.xxxx.gift.com.xxxx.gift.web.convert.TextConvert;
+import com.xxxx.gift.web.bean.TextImage;
+import com.xxxx.gift.web.convert.TextConvert;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;

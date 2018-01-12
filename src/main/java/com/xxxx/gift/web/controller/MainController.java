@@ -1,11 +1,12 @@
-package com.xxxx.gift.com.xxxx.gift.web.controller;
+package com.xxxx.gift.web.controller;
 
-import com.xxxx.gift.com.xxxx.gift.web.bean.PageVar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.xxxx.gift.web.bean.PageVar;
 
 @CrossOrigin
 @Controller
@@ -27,6 +28,11 @@ public class MainController {
     @RequestMapping("mycanvas")
     public String mycanvas() {
         return PageVar.MYCANVAS.getName();
+    }
+    
+    @RequestMapping("fonttest")
+    public String fonttest() {
+        return "fontTest";
     }
     
 }
