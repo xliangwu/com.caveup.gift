@@ -53,16 +53,18 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>fr.opensagres.xdocreport.sfntly</groupId>
-            <artifactId>sfntly</artifactId>
+            <groupId>com.google.font</groupId>
+            <artifactId>sfnttool</artifactId>
             <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/sfnttool.jar</systemPath>
         </dependency>
 
     </dependencies>
 
     <build>
         <resources>
-            <resource>
+<!--             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
                 <filtering>true</filtering>
                 <excludes>
@@ -75,7 +77,15 @@
                 <includes>
                     <include>static/font-awesome-4.7.0/fonts/**</include>
                 </includes>
-            </resource>
+            </resource> -->
+
+			<resource>
+				<directory>lib</directory>
+				<targetPath>BOOT-INF/lib/</targetPath>
+				<includes>
+					<include>**/*.jar</include>
+				</includes>
+			</resource>	
         </resources>
         <plugins>
             <plugin>
