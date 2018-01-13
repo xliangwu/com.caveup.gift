@@ -87,6 +87,9 @@ $(function () {
                 }
                 console.info("Path size after filter: " + pathArray.length);
                 if (pathArray.length > 0) {
+                	for (var i = 0; i < pathArray.length; i++) {
+                        this.targetCanvas.remove(pathArray[i])
+                    }
                     var pathGroup = new fabric.Group(pathArray);
                     pathGroup.borderColor = 'rgba(27,171,235,0.75)';
                     pathGroup.cornerSize = 25;
