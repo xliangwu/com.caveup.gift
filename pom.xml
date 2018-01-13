@@ -64,7 +64,7 @@
 
     <build>
         <resources>
-<!--             <resource>
+            <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
                 <filtering>true</filtering>
                 <excludes>
@@ -77,15 +77,15 @@
                 <includes>
                     <include>static/font-awesome-4.7.0/fonts/**</include>
                 </includes>
-            </resource> -->
+            </resource>
 
-			<resource>
-				<directory>lib</directory>
-				<targetPath>BOOT-INF/lib/</targetPath>
-				<includes>
-					<include>**/*.jar</include>
-				</includes>
-			</resource>	
+            <resource>
+                <directory>lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
         </resources>
         <plugins>
             <plugin>

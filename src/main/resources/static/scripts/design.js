@@ -16,23 +16,23 @@ $(function () {
             var canvas = event.target.canvas;
             var activeObj = canvas.getActiveObject();
             if (activeObj) {
-                var index = canvas.getActiveObjects().indexOf(activeObj);
+                var index = canvas.getObjects().indexOf(activeObj);
                 var total = canvas.size();
-                $('#move-front-btn').parent().removeClass("disabled");
-                $('#move-back-btn').parent().removeClass("disabled");
-                $('#move-forward-btn').parent().removeClass("disabled");
-                $('#move-backward-btn').parent().removeClass("disabled");
+                $('#move-front-btn').parent().show();
+                $('#move-back-btn').parent().show();
+                $('#move-forward-btn').parent().show();
+                $('#move-backward-btn').parent().show();
                 if (total == 1) {
-                    $('#move-front-btn').parent().addClass("disabled");
-                    $('#move-back-btn').parent().addClass("disabled");
-                    $('#move-forward-btn').parent().addClass("disabled");
-                    $('#move-backward-btn').parent().addClass("disabled");
+                    $('#move-front-btn').parent().hide();
+                    $('#move-back-btn').parent().hide();
+                    $('#move-forward-btn').parent().hide();
+                    $('#move-backward-btn').parent().hide();
                 } else if (index == 0) {
-                    $('#move-front-btn').parent().addClass("disabled");
-                    $('#move-forward-btn').parent().addClass("disabled");
+                    $('#move-back-btn').parent().hide();
+                    $('#move-backward-btn').parent().hide();
                 } else if (index == total - 1) {
-                    $('#move-front-btn').parent().addClass("disabled");
-                    $('#move-forward-btn').parent().addClass("disabled");
+                    $('#move-front-btn').parent().hide();
+                    $('#move-forward-btn').parent().hide();
                 }
             }
         });
