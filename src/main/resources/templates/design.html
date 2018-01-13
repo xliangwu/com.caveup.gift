@@ -20,7 +20,7 @@
 <body>
 <div class="design container">
     <div class="row" id="toolbar" style="display:none">
-        <div class="btn-group col-xs-3">
+        <div class="btn-group col-xs-4" id="tool-layer-btn">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" id="layer-active-button">
                 图层
@@ -32,21 +32,38 @@
                 <li><a href="#">后移一层</a></li>
             </ul>
         </div>
-        <div class="col-xs-3">
-            <a class="btn btn-info" href="#" id="cancel-button">
-                <i class="fa fa-rotate-left fa-lg"></i> 撤销
-            </a>
-        </div>
-        <div class="col-xs-3">
+        <div class="col-xs-4" id="tool-delete-btn">
             <a class="btn btn-danger" href="#" id="delete-active-button">
                 <i class="fa fa-trash-o fa-lg"></i> 删除
             </a>
         </div>
-        <div class="col-xs-3">
-            <span id="penWidthLabel" style="display:none">10</span>
-            <input id="penWidthControl" type="range" value="10" min="1" max="30"/>
+        <div class="col-xs-4" id="tool-back-btn">
+            <a class="btn btn-info" href="#" id="cancel-button">
+                <i class="fa fa-rotate-left fa-lg"></i> 撤销
+            </a>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-5" id="tool-pensize-btn">
+            <label>笔画&nbsp;</label>
+            <select id="penWidthControl" style="height:30px">
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option selected value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="22">22</option>
+                <option value="24">24</option>
+                <option value="26">26</option>
+                <option value="28">28</option>
+                <option value="30">30</option>
+                <option value="32">32</option>
+            </select>
+        </div>
+        <div class="col-xs-3" id="tool-done-btn">
             <a class="btn btn-info" href="#" id="close-draw-button">
                 <i class="fa fa-save fa-lg"></i> 结束
             </a>

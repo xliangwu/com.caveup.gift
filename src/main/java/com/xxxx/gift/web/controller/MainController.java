@@ -24,7 +24,7 @@ public class MainController {
     public String doDesign() {
         return PageVar.DESIGN.getName();
     }
-    
+
     @RequestMapping("mycanvas")
     public String mycanvas() {
         return PageVar.MYCANVAS.getName();
@@ -34,5 +34,5 @@ public class MainController {
     public String fonttest() {
         return "fontTest";
     }
-    
+
 }

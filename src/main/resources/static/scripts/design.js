@@ -4,12 +4,43 @@ $(function () {
         this.penSize = 10;
         this.toolbarEle = $('#toolbar');
 
-        this.showToolBar = function () {
-            $(this.toolbarEle).show();
+        this.targetCanvas.on('selection:created', function () {
+            $('#tool-layer-btn').show();
+            $('#tool-delete-btn').show();
+
+            $('#tool-back-btn').hide();
+            $('#tool-pensize-btn').hide();
+            $('#tool-done-btn').hide();
+            $('#toolbar').show();
+        });
+
+        this.targetCanvas.on('selection:cleared', function () {
+            $('#tool-layer-btn').hide();
+            $('#tool-delete-btn').hide();
+            $('#tool-back-btn').hide();
+            $('#tool-pensize-btn').hide();
+            $('#tool-done-btn').hide();
+            $('#toolbar').hide();
+        });
+
+        this.showDrawBtns = function () {
+            $('#tool-layer-btn').hide();
+            $('#tool-delete-btn').hide();
+
+            $('#tool-back-btn').show();
+            $('#tool-pensize-btn').show();
+            $('#tool-done-btn').show();
+            $('#toolbar').show();
         };
 
-        this.hideToolBar = function () {
-            $(this.toolbarEle).hide();
+        this.hideDrawBtns = function () {
+            $('#tool-layer-btn').hide();
+            $('#tool-delete-btn').hide();
+
+            $('#tool-back-btn').hide();
+            $('#tool-pensize-btn').hide();
+            $('#tool-done-btn').hide();
+            $('#toolbar').hide();
         };
 
         this.addImageEle = function (imgEle, width, height) {
@@ -33,6 +64,7 @@ $(function () {
             fabricImg.cornerStyle = 'circle';
             fabricImg.transparentCorners = false;
 
+
             this.targetCanvas.add(fabricImg);
         };
 
@@ -40,24 +72,19 @@ $(function () {
             var activeOb = this.targetCanvas.getActiveObject();
             if (activeOb) {
                 if (confirm("确定删除选定图层")) {
-                    if (activeOb.forEachObject) {
-                        activeOb.forEachObject(function (obj) {
-                            this.targetCanvas.remove(obj);
-                        });
-                    }
                     this.targetCanvas.remove(activeOb);
                 }
             }
         };
 
         this.startDraw = function () {
-            this.showToolBar();
+            this.showDrawBtns();
             this.targetCanvas.isDrawingMode = true;
             this.targetCanvas.freeDrawingBrush.width = this.penSize;
         };
 
         this.endDraw = function () {
-            this.hideToolBar();
+            this.hideDrawBtns();
             this.targetCanvas.isDrawingMode = false;
             this.groupThisTimeDraw();
         };
@@ -87,7 +114,7 @@ $(function () {
                 }
                 console.info("Path size after filter: " + pathArray.length);
                 if (pathArray.length > 0) {
-                	for (var i = 0; i < pathArray.length; i++) {
+                    for (var i = 0; i < pathArray.length; i++) {
                         this.targetCanvas.remove(pathArray[i])
                     }
                     var pathGroup = new fabric.Group(pathArray);
@@ -118,8 +145,8 @@ $(function () {
         });
 
         $("#penWidthControl").on("change", function () {
-            $("#penWidthLabel").html(this.value);
-            fabricDesign.penSize = parseInt(this.value) || 5;
+            fabricDesign.penSize = $('#penWidthControl').val() || 5;
+            fabricDesign.startDraw();
         });
 
         $('#save-text-button').on("click", function () {

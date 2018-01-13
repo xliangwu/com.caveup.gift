@@ -27,7 +27,7 @@ public class DesignController {
             File output = new File(uuid + ".png");
             TextImage textImage = TextConvert.text2Image(content, fontName, fontSize, output);
             FileUtils.deleteQuietly(output);
-            LOGGER.info("Generate image :{}", output.getPath());
+            LOGGER.info("Generate {} to image :{}", content, output.getPath());
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(textImage);
         } catch (JsonProcessingException e) {
