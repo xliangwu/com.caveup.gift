@@ -4,7 +4,7 @@ $(function () {
         this.penSize = 10;
         this.toolbarEle = $('#toolbar');
 
-        this.targetCanvas.on('selection:created', function () {
+        this.targetCanvas.on('selection:created', function (event) {
             $('#tool-layer-btn').show();
             $('#tool-delete-btn').show();
 
@@ -12,6 +12,29 @@ $(function () {
             $('#tool-pensize-btn').hide();
             $('#tool-done-btn').hide();
             $('#toolbar').show();
+
+            var canvas = event.target.canvas;
+            var activeObj = canvas.getActiveObject();
+            if (activeObj) {
+                var index = canvas.getActiveObjects().indexOf(activeObj);
+                var total = canvas.size();
+                $('#move-front-btn').parent().removeClass("disabled");
+                $('#move-back-btn').parent().removeClass("disabled");
+                $('#move-forward-btn').parent().removeClass("disabled");
+                $('#move-backward-btn').parent().removeClass("disabled");
+                if (total == 1) {
+                    $('#move-front-btn').parent().addClass("disabled");
+                    $('#move-back-btn').parent().addClass("disabled");
+                    $('#move-forward-btn').parent().addClass("disabled");
+                    $('#move-backward-btn').parent().addClass("disabled");
+                } else if (index == 0) {
+                    $('#move-front-btn').parent().addClass("disabled");
+                    $('#move-forward-btn').parent().addClass("disabled");
+                } else if (index == total - 1) {
+                    $('#move-front-btn').parent().addClass("disabled");
+                    $('#move-forward-btn').parent().addClass("disabled");
+                }
+            }
         });
 
         this.targetCanvas.on('selection:cleared', function () {
@@ -126,6 +149,34 @@ $(function () {
                     this.targetCanvas.add(pathGroup);
                 }
             }
+        };
+
+        this.moveFront = function () {
+            var activeObj = this.targetCanvas.getActiveObject();
+            if (activeObj) {
+                this.targetCanvas.bringToFront(activeObj);
+            }
+        };
+
+        this.moveBack = function () {
+            var activeObj = this.targetCanvas.getActiveObject();
+            if (activeObj) {
+                this.targetCanvas.sendToBack(activeObj);
+            }
+        };
+
+        this.moveForward = function () {
+            var activeObj = this.targetCanvas.getActiveObject();
+            if (activeObj) {
+                this.targetCanvas.bringForward(activeObj, true);
+            }
+        };
+
+        this.moveBackward = function () {
+            var activeObj = this.targetCanvas.getActiveObject();
+            if (activeObj) {
+                this.targetCanvas.sendBackwards(activeObj, true);
+            }
         }
     }
 
@@ -181,6 +232,22 @@ $(function () {
                     fabricDesign.addImageEle(ele);
                 });
             });
+        });
+
+        $("#move-front-btn").on("click", function () {
+            fabricDesign.moveFront();
+        });
+
+        $("#move-back-btn").on("click", function () {
+            fabricDesign.moveBack();
+        });
+
+        $("#move-forward-btn").on("click", function () {
+            fabricDesign.moveForward();
+        });
+
+        $("#move-backward-btn").on("click", function () {
+            fabricDesign.moveBackward();
         });
     }
 });
