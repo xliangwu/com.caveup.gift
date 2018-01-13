@@ -1,6 +1,7 @@
 package com.xxxx.gift.web.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +21,18 @@ public class FontController {
     @Autowired
     SfntlyService sfntlyService;
 
-    @RequestMapping("/{fontFamily}.ttf")
-    public byte[] getSubFont(@PathVariable String fontFamily, @RequestParam(value = "key") String subString) throws IOException {
-        LOGGER.info("get sub font for {},{}", fontFamily, subString);
-        return sfntlyService.getSubFont(fontFamily, subString);
-    }
+	@RequestMapping("/{fontFamily}.ttf")
+	public byte[] getSubFont(@PathVariable String fontFamily, @RequestParam(value = "key") String subString)
+			throws IOException {
+		LOGGER.info("get sub font for {}, {}", fontFamily, subString);
+		return sfntlyService.getSubFont(fontFamily, subString, false);
+	}
+
+	@RequestMapping("/{fontFamily}.woff")
+	public byte[] getSubFontWoff(@PathVariable String fontFamily, @RequestParam(value = "key") String subString)
+			throws IOException {
+		LOGGER.info("get sub font for {}, {}", fontFamily, subString);
+		return sfntlyService.getSubFont(fontFamily, subString, true);
+	}
 
 }

@@ -1,36 +1,50 @@
 package com.xxxx.gift.web.service;
 
-import com.google.typography.font.sfntly.Font;
-import com.google.typography.font.sfntly.FontFactory;
-import com.google.typography.font.sfntly.Tag;
-import com.google.typography.font.tools.sfnttool.GlyphCoverage;
-import com.google.typography.font.tools.subsetter.RenumberingSubsetter;
-import com.google.typography.font.tools.subsetter.Subsetter;
-import org.springframework.stereotype.Service;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
+import com.google.typography.font.sfntly.Font;
+import com.google.typography.font.sfntly.FontFactory;
+import com.google.typography.font.sfntly.Tag;
+import com.google.typography.font.sfntly.data.WritableFontData;
+import com.google.typography.font.sfntly.table.core.CMapTable;
+import com.google.typography.font.tools.conversion.woff.WoffWriter;
+import com.google.typography.font.tools.sfnttool.GlyphCoverage;
+import com.google.typography.font.tools.subsetter.RenumberingSubsetter;
+import com.google.typography.font.tools.subsetter.Subsetter;
+
 @Service
 public class SfntlyService {
 
-    public byte[] getSubFont(String fontFamily, String subString) throws IOException {
+    public byte[] getSubFont(String fontFamily, String subString, boolean isWoff) throws IOException {
         FontFactory fontFactory = FontFactory.getInstance();
         byte[] fontByte = getFontBytes(fontFamily);
         Font font = fontFactory.loadFonts(fontByte)[0];
 
         Subsetter subsetter = new RenumberingSubsetter(font, fontFactory);
+        List<CMapTable.CMapId> cmapIds = new ArrayList<CMapTable.CMapId>();
+        cmapIds.add(CMapTable.CMapId.WINDOWS_BMP);
+        subsetter.setCMaps(cmapIds, 1);
         subsetter.setRemoveTables(getRemoveTable());
+        
         List<Integer> glyphs = GlyphCoverage.getGlyphCoverage(font, subString);
         subsetter.setGlyphs(glyphs);
         Font newFont = subsetter.subset().build();
 
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        fontFactory.serializeFont(newFont, outStream);
+        if(isWoff){
+        	WritableFontData woffData = new WoffWriter().convert(newFont);
+        	woffData.copyTo(outStream);
+        } else {
+        	fontFactory.serializeFont(newFont, outStream);
+        }
         return outStream.toByteArray();
     }
 
