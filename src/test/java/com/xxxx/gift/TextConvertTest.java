@@ -3,6 +3,7 @@ package com.xxxx.gift;
 import com.xxxx.gift.web.convert.TextConvert;
 import org.junit.Test;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,15 @@ public class TextConvertTest {
         String line = null;
         while ((line = br.readLine()) != null) {
             System.out.println(line);
+        }
+    }
+
+    @Test
+    public void listAllFonts() {
+        GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        String[] fontName = e.getAvailableFontFamilyNames();
+        for (int i = 0; i < fontName.length; i++) {
+            System.out.println(fontName[i]);
         }
     }
 }

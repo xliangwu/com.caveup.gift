@@ -5,14 +5,6 @@ $(function () {
         this.toolbarEle = $('#toolbar');
 
         this.targetCanvas.on('selection:created', function (event) {
-            $('#tool-layer-btn').show();
-            $('#tool-delete-btn').show();
-
-            $('#tool-back-btn').hide();
-            $('#tool-pensize-btn').hide();
-            $('#tool-done-btn').hide();
-            $('#toolbar').show();
-
             var canvas = event.target.canvas;
             var activeObj = canvas.getActiveObject();
             if (activeObj) {
@@ -35,6 +27,14 @@ $(function () {
                     $('#move-forward-btn').parent().hide();
                 }
             }
+
+            $('#tool-layer-btn').show();
+            $('#tool-delete-btn').show();
+
+            $('#tool-back-btn').hide();
+            $('#tool-pensize-btn').hide();
+            $('#tool-done-btn').hide();
+            $('#toolbar').show();
         });
 
         this.targetCanvas.on('selection:cleared', function () {
@@ -77,8 +77,8 @@ $(function () {
                 top: 10,
                 width: fabricWidth,
                 height: fabricHeight,
-                scaleY: 200 / fabricWidth,
-                scaleX: 200 / fabricWidth
+                scaleY: 150 / fabricWidth,
+                scaleX: 150 / fabricWidth
             });
 
             fabricImg.borderColor = 'rgba(27,171,235,0.75)';
@@ -204,12 +204,13 @@ $(function () {
             var fontName = $('#inputFont').val();
             var fontSize = $('#inputFontSize').val();
             var content = $('#inputText').val();
+            var layout = $("input[name='inlineRadioOptions']:checked").val();
             $.ajax({
                 method: "POST",
                 dataType: 'json',
                 crossDomain: true,
                 url: "design/text_image.html",
-                data: {fontName: fontName, fontSize: fontSize, content: content},
+                data: {fontName: fontName, fontSize: fontSize, content: content, layout: layout},
                 success: function (result) {
                     var img = new Image();
                     img.src = result.base64Code;
@@ -224,7 +225,7 @@ $(function () {
             });
         });
 
-        $("#imageContent").find("a").each(function (index, ele) {
+        $("#myTabContent").find("a").each(function (index, ele) {
             $(ele).on("click", function () {
                 $('#add-pic').modal('hide');
                 $(this).children("img").each(function (index, ele) {

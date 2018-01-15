@@ -13,6 +13,7 @@
     <link th:href="@{font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
 
     <script th:src="@{scripts/jquery-3.2.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{bootstrap-4.0.0/js/bootstrap.min.js}" type="text/javascript"></script>
     <script th:src="@{scripts/fabric.js}" type="text/javascript"></script>
     <script th:src="@{scripts/popper.min.js}" type="text/javascript"></script>
     <title>礼知遇-礼物专属定制</title>
@@ -121,46 +122,384 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row" id="imageContent">
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="./img/cimpress.png">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="./img/dragon.png">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="./img/onepass.png">
-                                </a>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <a href="#" class="thumbnail">
-                                    <img src="./img/regret.png">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center pagination-lg">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span>上一页</span>
+                        <ul class="nav nav-tabs" id="imageNavTabs">
+                            <li role="presentation" class="active"><a href="#tab_1" data-toggle="tab">爱情</a></li>
+                            <li role="presentation"><a href="#tab_2" data-toggle="tab">企业庆典</a></li>
+                            <li role="presentation"><a href="#tab_3" data-toggle="tab">生日节庆</a></li>
+                            <li role="presentation"><a href="#tab_4" data-toggle="tab">生肖</a></li>
+                            <li role="presentation"><a href="#tab_5" data-toggle="tab">师生同学</a></li>
+                            <li role="presentation"><a href="#tab_6" data-toggle="tab">贴纸</a></li>
+                            <li role="presentation"><a href="#tab_7" data-toggle="tab">星座</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content" style="padding-top:10px">
+                            <div role="tabpanel" class="tab-pane fade in active" id="tab_1">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/aiqing/heart1.png">
                                         </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span>下一页</span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/aiqing/heart2.png">
                                         </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/aiqing/heart3.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/aiqing/heart4.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/aiqing/love.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/aiqing/love2.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/aiqing/meigui.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_2">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/qiye/y1.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/qiye/y2.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/qiye/y3.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/qiye/y4.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/qiye/y5.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/qiye/y6.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_3">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/fu.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/furudonghai.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/gift_1.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/gift_2.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/gift_3.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/gou.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/HAPPY.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/happy_birth.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/happy_new_year.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/pixiu.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/to_you.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/birthday/yearyear.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_4">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z1.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z2.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z3.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z4.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z5.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z6.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z7.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z8.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z9.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z10.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z11.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/zodiac/z12.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_5">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s1.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s1.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s2.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s3.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s4.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s5.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s6.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s7.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/schoolmate/s8.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_6">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p1.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p2.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p3.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p4.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p5.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p6.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p7.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p8.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/paster/p9.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_7">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c1.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c1.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c2.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c3.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c4.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c5.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c6.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c7.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c8.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c9.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c10.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c11.png">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#" class="thumbnail">
+                                            <img src="./img/constellation/c12.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -186,7 +525,28 @@
                                 <label for="inputFont" class="col-sm-2 control-label">字体</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" id="inputFont" style="height:40px">
+                                        <option value="仿宋">仿宋</option>
                                         <option value="TimesRoman">TimesRoman</option>
+                                        <option value="华文中宋">华文中宋</option>
+                                        <option value="华文仿宋">华文仿宋</option>
+                                        <option value="华文宋体">华文宋体</option>
+                                        <option value="华文彩云">华文彩云</option>
+                                        <option value="华文新魏">华文新魏</option>
+                                        <option value="华文楷体">华文楷体</option>
+                                        <option value="华文琥珀">华文琥珀</option>
+                                        <option value="华文细黑">华文细黑</option>
+                                        <option value="华文行楷">华文行楷</option>
+                                        <option value="华文隶书">华文隶书</option>
+                                        <option value="宋体">宋体</option>
+                                        <option value="微软雅黑">微软雅黑</option>
+                                        <option value="新宋体">新宋体</option>
+                                        <option value="方正姚体">方正姚体</option>
+                                        <option value="方正等线">方正等线</option>
+                                        <option value="方正舒体">方正舒体</option>
+                                        <option value="楷体">楷体</option>
+                                        <option value="等线">等线</option>
+                                        <option value="隶书">隶书</option>
+                                        <option value="黑体">黑体</option>
                                     </select>
                                 </div>
                             </div>
@@ -213,6 +573,20 @@
                                         <option value="104">104pt</option>
                                         <option value="108">108pt</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputText" class="col-sm-2 control-label">布局</label>
+                                <div class="col-sm-10">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" checked
+                                               value="0">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;横排
+                                    </label>
+                                    <label class="radio-inline" style="width: 80px;">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;竖排
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -267,8 +641,18 @@
         $(image).attr('height', $('#canvas')[0].height);
         $('#preview-pic').modal('show');
     }
+
+    $(function () {
+        $('#imageNavTabs a').click(function (e) {
+            e.preventDefault();
+            $('#imageNavTabs >li').each(function (index, item) {
+                $(item).removeClass("active");
+            });
+            $(this).parent().addClass("active");
+            $(this).tab('show');
+        })
+    });
 </script>
-<script th:src="@{bootstrap-4.0.0/js/bootstrap.min.js}" type="text/javascript"></script>
 <script th:src="@{scripts/design.js}" type="text/javascript"></script>
 </body>
 </html>

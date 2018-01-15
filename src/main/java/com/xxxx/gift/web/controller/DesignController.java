@@ -21,13 +21,14 @@ public class DesignController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DesignController.class);
 
     @RequestMapping("text_image")
-    public String textToImage(String fontName, int fontSize, String content) {
+    public String textToImage(String fontName, int fontSize, String content, String layout) {
+        LOGGER.info("Font name :{}, font size :{}, Content :{}", fontName, fontSize, content);
         String uuid = UUID.randomUUID().toString();
         try {
             File output = new File(uuid + ".png");
             TextImage textImage = TextConvert.text2Image(content, fontName, fontSize, output);
             FileUtils.deleteQuietly(output);
-            LOGGER.info("Generate {} to image :{}", content, output.getPath());
+            LOGGER.info("Generate image :{}", content, output.getPath());
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(textImage);
         } catch (JsonProcessingException e) {
