@@ -1,16 +1,13 @@
 package com.xxxx.gift.web.convert;
 
+import com.xxxx.gift.web.bean.TextImage;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.xxxx.gift.web.bean.TextImage;
-
 import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -56,7 +53,7 @@ public final class TextConvert {
         g2d.dispose();
 
         img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        AffineTransform at = AffineTransform.getQuadrantRotateInstance(1);
+        g2d = img.createGraphics();
         g2d.setFont(font);
         fm = g2d.getFontMetrics();
         g2d.setColor(Color.BLACK);

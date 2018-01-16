@@ -14,7 +14,7 @@ public class TextConvertTest {
     @Test
     public void test1() {
         File output = new File("test.png");
-        TextConvert.text2Image("中国\n123", "TimesRoman", 36, output);
+        TextConvert.text2Image("中国\n123", "STKaiti", 36, output);
         String base64Image = TextConvert.image2Base64(output.getPath());
         System.out.println(base64Image);
     }
